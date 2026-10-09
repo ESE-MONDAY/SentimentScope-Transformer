@@ -1,0 +1,10 @@
+# Exclude the dataset
+aclImdb/
+aclImdb_v1.tar*
+*.tar
+*.tar.gz
+
+# Exclude checkpoints
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
