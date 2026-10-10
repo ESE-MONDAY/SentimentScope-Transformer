@@ -1,7 +1,8 @@
 import os
 import torch
 import torch.nn as nn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from transformers import AutoTokenizer
 
@@ -140,7 +141,11 @@ def load_artifacts():
 
     # Load tokenizer
     tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
-
+@app.get("/", response_class=HTMLResponse)
+def read_root():
+    with open("index.html", "r", encoding="utf-8") as f:
+        return f.read()
+    
 @app.get("/health", response_model=HealthResponse)
 def health_check():
     is_model_ready = model is not None
